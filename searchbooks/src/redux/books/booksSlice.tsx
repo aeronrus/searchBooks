@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Book, Books, BooksSliceState } from './types';
+import { Books, BooksSliceState } from './types';
 
 const initialState: BooksSliceState = {
   items: [],
@@ -8,7 +8,7 @@ const initialState: BooksSliceState = {
 };
 
 export const fetchBooks = createAsyncThunk<Books[]>('books/fetchBooks', async () => {
-  const { data } = await axios.get(
+  const { data } = await axios.get<Books[]>(
     'https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor',
   );
   return data;
@@ -16,7 +16,7 @@ export const fetchBooks = createAsyncThunk<Books[]>('books/fetchBooks', async ()
 
 const booksSlice = createSlice({
   name: 'books',
-  initialState,
+  initialState: initialState,
   reducers: {
     setBooks(state, action: PayloadAction<Books[]>) {
       state.items = action.payload;
@@ -32,7 +32,7 @@ const booksSlice = createSlice({
       state.items = action.payload;
     });
     builder.addCase(fetchBooks.fulfilled, (state) => {
-      state.status = 'loaded';
+      state.status = 'error';
       state.items = [];
     });
   },

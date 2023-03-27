@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import Header from '../components/Header';
+import Headerx from '../components/Header/Headerx';
 
 const Home: React.FC = () => {
   return (
     <div>
-      <Header />
+      <Headerx />
     </div>
   );
 };
