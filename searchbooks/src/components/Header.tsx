@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import '../../scss/components/_header.scss';
 import { NavLink, useLocation } from 'react-router-dom';
 
-const Headerx: React.FC = () => {
+const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="container">
@@ -62,4 +62,4 @@ const Headerx: React.FC = () => {
   );
 };
 
-export default Headerx;
+export default Header;

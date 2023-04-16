@@ -64,12 +64,17 @@ export type Book = {
   };
 };
 
+export type SearchBooksParams = {
+  searchValue: string;
+  startIndex: number;
+};
+
 export type Books = {
   kind: string;
   totalItems: number;
   items: Book[];
 };
 export interface BooksSliceState {
-  items: Books[];
+  books: Books[];
   status: string;
 }
