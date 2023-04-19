@@ -1,22 +1,21 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchBooks, setBooksNull } from '../redux/books/booksSlice';
+import '../scss/components/_header.scss';
 import {
   selectFilter,
   setCategoryId,
-  setStartIndexNull,
   setSortId,
+  setStartIndexNull,
 } from '../redux/filter/filterSlice';
-import '../scss/components/_header.scss';
+import { fetchBooks, setBooksNull } from '../redux/books/booksSlice';
+import { useAppDispatch } from '../redux/store';
 
 const Header: React.FC = () => {
-  const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
   const { categoryId, sortId, startIndex } = useSelector(selectFilter);
-
+  const dispatch = useAppDispatch();
   const categories = ['', 'art', 'biography', 'computers', 'history', 'medical', 'poetry'];
   const sorts = ['relevance', 'newest'];
 
@@ -33,10 +32,6 @@ const Header: React.FC = () => {
       dispatch(
         fetchBooks({
           searchValue,
-          categories,
-          categoryId,
-          sorts,
-          sortId,
           startIndex,
         }),
       );
@@ -50,10 +45,6 @@ const Header: React.FC = () => {
     dispatch(
       fetchBooks({
         searchValue,
-        categories,
-        categoryId,
-        sorts,
-        sortId,
         startIndex,
       }),
     );
