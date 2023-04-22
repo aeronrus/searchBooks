@@ -3,43 +3,10 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import '../scss/components/_book-block.scss';
-import Book from '../redux/books/types';
+import { oneBook } from '../redux/books/types';
 
-const BookItem: React.FC<Book> = () => {
-  const [book, setBook] = useState<{
-    volumeInfo: {
-      title: string;
-      authors: [string];
-      publishedDate: number;
-      industryIdentifiers: [
-        {
-          type: string;
-          identifier: string;
-        },
-      ];
-      readingModes: {
-        text: boolean;
-        image: boolean;
-      };
-      pageCount: number;
-      printType: string;
-      maturityRating: string;
-      allowAnonLogging: boolean;
-      contentVersion: string;
-      panelizationSummary: {
-        containsEpubBubbles: boolean;
-        containsImageBubbles: false;
-      };
-      imageLinks: {
-        smallThumbnail: string;
-        thumbnail: string;
-      };
-      language: string;
-      previewLink: string;
-      infoLink: string;
-      canonicalVolumeLink: string;
-    };
-  }>();
+const BookItem: React.FC = () => {
+  const [book, setBook] = useState<oneBook>();
   const [loaded, setIsLoaded] = useState(false);
   const { id } = useParams();
 
@@ -64,24 +31,24 @@ const BookItem: React.FC<Book> = () => {
 
   return loaded ? (
     <div className="content">
-      <img className="content__bigImg" src={book.volumeInfo.imageLinks.thumbnail} />
+      <img className="content__bigImg" src={book?.volumeInfo?.imageLinks.thumbnail} />
       <div className="container">
         {' '}
-        <h2>{book.volumeInfo.title}</h2>
+        <h2>{book?.volumeInfo.title}</h2>
         <h4>
           Authors:
-          {book.volumeInfo?.authors?.map((item) => (
+          {book?.volumeInfo?.authors?.map((item) => (
             <p>{item}</p>
           ))}
         </h4>
         <h4>
           Categories:
-          {book.volumeInfo.categories?.map((item) => (
+          {book?.volumeInfo.categories?.map((item) => (
             <p>{item}</p>
           ))}
         </h4>
         <h4>
-          Description:<p>{book.volumeInfo.description}</p>
+          Description:<p>{book?.volumeInfo.description}</p>
         </h4>
       </div>
       <Link to="/">

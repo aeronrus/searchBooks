@@ -47,5 +47,5 @@ const booksSlice = createSlice({
 });
 
 export const { setBooks, setBooksNull } = booksSlice.actions;
-export const selectBooks = (state: RootState) => state.book;
+export const selectBooks = (state) => state.book;
 export default booksSlice.reducer;

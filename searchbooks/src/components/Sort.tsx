@@ -49,4 +49,4 @@ const Sort: React.FC<SortProps> = React.memo(({ sortId }) => {
   );
 });
 
-export default Sort;
+export { Sort };
